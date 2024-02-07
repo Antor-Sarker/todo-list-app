@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from "react";
 
-function Header({ setModalMode,taskListData, handelPriority, handelSearch}) {
+function Header({ setModalMode,tasks, handelPriority, handelSearch}) {
   const [countComplete, setCountComplete]=useState(0)
   
 
   useEffect(()=>{
-    let a=0;
-    taskListData.forEach(task => {
-      if(task.isComplete===true) a++;
+    let count=0;
+    tasks.forEach(task => {
+      if(task.isComplete===true) count++;
     });
-    setCountComplete(a)
-  },[taskListData])
+    setCountComplete(count)
+  },[tasks])
 
    
   return (
@@ -37,7 +37,7 @@ function Header({ setModalMode,taskListData, handelPriority, handelSearch}) {
 
         <div>
           <p>
-            Total: {taskListData.length}| Complete: {countComplete}
+            Total: {tasks.length}| Complete: {countComplete}
           </p>
           <hr />
         </div>

@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 
 
-export default function TaskList({ taskListData, setModalMode, handelComplete, handelDeleteTask}) {
+export default function TaskList({ tasks, setModalMode, handelComplete, handelDeleteTask}) {
   return (
     <>
       <ul>
-        {taskListData.map((task) => (
+        {tasks.map((task) => (
           <DisplayTask key={task.id} task={task} handelComplete={handelComplete}  handelDeleteTask={handelDeleteTask} setModalMode={setModalMode} />
         ))}
       </ul>
