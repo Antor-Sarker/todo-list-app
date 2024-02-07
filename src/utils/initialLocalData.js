@@ -10,8 +10,15 @@ export default function initialLocalData(){
           id: crypto.randomUUID(),
           name: "task-1",
           isComplete: false,
+          Priority: "High",
+        },
+
+        {
+          id: crypto.randomUUID(),
+          name: "task-2",
+          isComplete: false,
           priyority: "High",
-        }
+        },
       ]
 
       localStorage.setItem("taskList", JSON.stringify(newTask))
