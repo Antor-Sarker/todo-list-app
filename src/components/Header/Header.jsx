@@ -1,8 +1,16 @@
 /* eslint-disable react/prop-types */
-import AddTaskModal from "./AddTaskModal";
 
-function Header({modalMode,setModalMode, handelAddTask}) {
+import { useEffect, useState } from "react";
 
+function Header({ setModalMode,taskListData }) {
+  const [countComplete, setCountComplete]=useState(0)
+  useEffect(()=>{
+    let a=0;
+    taskListData.forEach(task => {
+      if(task.isComplete===true) a++;
+    });
+    setCountComplete(a)
+  },[taskListData])
   return (
     <div className="">
       <div className="flex justify-center">
@@ -10,11 +18,9 @@ function Header({modalMode,setModalMode, handelAddTask}) {
           <input type="search" name="" id="" placeholder="Search Task" />
         </div>
         <div className="bg-green-500 text-white">
-          <button onClick={()=>setModalMode(true)}>add Task</button>
+          <button onClick={() => setModalMode("add")}>add Task</button>
         </div>
       </div>
-
-      {modalMode && <AddTaskModal setModalMode={setModalMode} handelAddTask={handelAddTask}/>}
 
       <div className="flex justify-center">
         <select name="" id="" className="bg-black">
@@ -25,7 +31,7 @@ function Header({modalMode,setModalMode, handelAddTask}) {
 
         <div>
           <p>
-            Total: {2}| Complete: {1}
+            Total: {taskListData.length}| Complete: {countComplete}
           </p>
           <hr />
         </div>

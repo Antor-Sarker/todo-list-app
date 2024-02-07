@@ -7,14 +7,8 @@ function addToLocalStorage(newTask){
     localStorage.setItem("taskList", JSON.stringify(updatedData))
 }
 
-function deleteFromLocalStorage(updatedTask){
-    // const data = JSON.parse(localStorage.getItem("taskList"))
-    // const updatedData = [
-    //   newTask,
-    //   ...data
-    // ]
-    localStorage.setItem("taskList", JSON.stringify(updatedTask))
+function updateLocalStorage(updatedData){
+    localStorage.setItem("taskList", JSON.stringify(updatedData))
 }
 
-
-export { addToLocalStorage, deleteFromLocalStorage}
+export { addToLocalStorage, updateLocalStorage}

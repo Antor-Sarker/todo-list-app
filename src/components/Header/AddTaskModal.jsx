@@ -3,16 +3,16 @@
 import { useState } from "react";
 
 /* eslint-disable react/prop-types */
-export default function AddTaskModal({ setModalMode, handelAddTask }) {
+export default function AddTaskModal({modalMode, setModalMode, handelAddTask, handelEditTask}) {
   const [data, setData] = useState({
-    id: crypto.randomUUID(),
-    name: "",
-    isComplete: false,
-    Priority: "",
+    id: modalMode==="add"? crypto.randomUUID(): modalMode.id,
+    name: modalMode==="add"? "": modalMode.name,
+    isComplete: modalMode==="add"? false: modalMode.isComplete,
+    Priority: modalMode==="add"? "": modalMode.Priority, 
   });
   function handelSubmit(e) {
     e.preventDefault()
-    handelAddTask(data)
+    modalMode==="add"? handelAddTask(data): handelEditTask(data)
   }
   function handelOnChange(e){
     setData({
@@ -27,10 +27,10 @@ export default function AddTaskModal({ setModalMode, handelAddTask }) {
       <div className="p-8 absolute z-10 bg-slate-900 bg-opacity-100 top-28 left-1/2">
         <form onSubmit={handelSubmit}>
           <div>
-            <input type="text" name="name" id="" required  onChange={handelOnChange}/>
+            <input type="text" name="name" value={data.name} required  onChange={handelOnChange}/>
           </div>
           <div>
-            <select name="priority" id="" className="bg-black" required onChange={handelOnChange}>
+            <select name="priority" id="" className="bg-black" required defaultValue={data.Priority} onChange={handelOnChange}>
               <option value=""></option>
               <option value="high">High</option>
               <option value="medium">Medium</option>
@@ -46,7 +46,7 @@ export default function AddTaskModal({ setModalMode, handelAddTask }) {
               cancel
             </button>
             <button type="submit" className="bg-green-400" onClick={handelSubmit}>
-              add
+              {modalMode==="add"? "add" : "update"}
             </button>
           </div>
         </form>
