@@ -1,25 +1,40 @@
-/* eslint-disable no-unused-vars */
-
 import { useState } from "react";
 
 /* eslint-disable react/prop-types */
-export default function AddTaskModal({modalMode, setModalMode, handelAddTask, handelEditTask}) {
+export default function AddTaskModal({
+  modalMode,
+  setModalMode,
+  handelAddTask,
+  handelEditTask,
+}) {
   const [data, setData] = useState({
-    id: modalMode==="add"? crypto.randomUUID(): modalMode.id,
-    name: modalMode==="add"? "": modalMode.name,
-    isComplete: modalMode==="add"? false: modalMode.isComplete,
-    Priority: modalMode==="add"? "": modalMode.Priority, 
+    id: modalMode === "add" ? crypto.randomUUID() : modalMode.id,
+    name: modalMode === "add" ? '' : modalMode.name,
+    isComplete: modalMode === "add" ? false : modalMode.isComplete,
+    priority: modalMode === "add" ? '' : modalMode.priority,
   });
   function handelSubmit(e) {
-    e.preventDefault()
-    modalMode==="add"? handelAddTask(data): handelEditTask(data)
-  }
-  function handelOnChange(e){
-    setData({
-        ...data,
-        [e.target.name] : e.target.value,
-    })
+    e.preventDefault();
+
+    if(data.name===''){
+      alert('input task name')
+      return
+    }
+    if(data.priority===''){
+      alert('select priority')
+      return 
+    }
+
+
     
+    
+    modalMode === "add" ? handelAddTask(data) : handelEditTask(data);
+  }
+  function handelOnChange(e) {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
   }
 
   return (
@@ -27,10 +42,24 @@ export default function AddTaskModal({modalMode, setModalMode, handelAddTask, ha
       <div className="p-8 absolute z-10 bg-slate-900 bg-opacity-100 top-28 left-1/2">
         <form onSubmit={handelSubmit}>
           <div>
-            <input type="text" name="name" value={data.name} required  onChange={handelOnChange}/>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={data.name}
+              onChange={handelOnChange}
+              required
+            />
           </div>
           <div>
-            <select name="priority" id="" className="bg-black" required defaultValue={data.Priority} onChange={handelOnChange}>
+            <select
+              name="priority"
+              id="priority"
+              className="bg-black"
+              defaultValue={data.Priority}
+              onChange={handelOnChange}
+              required
+            >
               <option value=""></option>
               <option value="High">High</option>
               <option value="Medium">Medium</option>
@@ -45,8 +74,12 @@ export default function AddTaskModal({modalMode, setModalMode, handelAddTask, ha
             >
               cancel
             </button>
-            <button type="submit" className="bg-green-400" onClick={handelSubmit}>
-              {modalMode==="add"? "add" : "update"}
+            <button
+              type="submit"
+              className="bg-green-400"
+              onClick={handelSubmit}
+            >
+              {modalMode === "add" ? "add" : "update"}
             </button>
           </div>
         </form>

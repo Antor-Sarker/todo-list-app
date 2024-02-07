@@ -1,16 +1,13 @@
-import {
-  addToLocalStorage,
-  updateLocalStorage,
-} from "../utils/manageLocalData";
+import updateLocalStorage from "../utils/updateLocalStorageData";
+
 
 export default function taskReducer(tasks, action) {
   switch (action.type) {
-    case "InitialLocalData":{
-        return [...action.payload]
+    case "InitialLocalData": {
+      return [...action.payload];
     }
-    
     case "AddTask": {
-      addToLocalStorage(action.payload);
+      updateLocalStorage([action.payload, ...tasks]);
       return [action.payload, ...tasks];
     }
 
@@ -61,19 +58,19 @@ export default function taskReducer(tasks, action) {
       const afterDeleteData = tasks.filter(
         (task) => task.id !== action.payload
       );
-      updateLocalStorage(afterDeleteData);
 
+      updateLocalStorage(afterDeleteData);
       return [...afterDeleteData];
     }
 
-    case "Edit":{
-        const updatedTask = tasks.map((task) => {
-            if (task.id === action.payload.id) return action.payload;
-            else return task;
-          });
-      
-          updateLocalStorage(updatedTask);
-          return [...updatedTask]
+    case "Edit": {
+      const updatedTask = tasks.map((task) => {
+        if (task.id === action.payload.id) return action.payload;
+        else return task;
+      });
+
+      updateLocalStorage(updatedTask);
+      return [...updatedTask];
     }
 
     default: {

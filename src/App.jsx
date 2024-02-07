@@ -3,7 +3,7 @@ import taskReducer from "./Reducer/taskReducer";
 import AddTaskModal from "./components/Header/AddTaskModal";
 import Header from "./components/Header/Header";
 import TaskList from "./components/TaskList/TaskList";
-import initialLocalData from "./utils/initialLocalData";
+import initialLocalStorageData from "./utils/initialLocalStorageData";
 
 function App() {
   const [modalMode, setModalMode] = useState(false);
@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     dispatch({
       type: "InitialLocalData",
-      payload: initialLocalData(),
+      payload: initialLocalStorageData(),
     });
   }, []);
 
