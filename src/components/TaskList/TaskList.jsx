@@ -14,6 +14,7 @@ export default function TaskList({ taskListData, setModalMode, handelComplete, h
 }
 
 function DisplayTask({ task, handelComplete, handelDeleteTask, setModalMode}) {
+    
     return (
       <>
         <li className="flex p-5 justify-center">

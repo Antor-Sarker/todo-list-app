@@ -32,8 +32,8 @@ export default function AddTaskModal({modalMode, setModalMode, handelAddTask, ha
           <div>
             <select name="priority" id="" className="bg-black" required defaultValue={data.Priority} onChange={handelOnChange}>
               <option value=""></option>
-              <option value="high">High</option>
-              <option value="medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
               <option value="Low">Low</option>
             </select>
           </div>

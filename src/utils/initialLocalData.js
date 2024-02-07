@@ -10,14 +10,14 @@ export default function initialLocalData(){
           id: crypto.randomUUID(),
           name: "task-1",
           isComplete: false,
-          Priority: "High",
+          priority: "High",
         },
 
         {
           id: crypto.randomUUID(),
           name: "task-2",
           isComplete: false,
-          priyority: "High",
+          priority: "High",
         },
       ]
 

@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 
-function Header({ setModalMode,taskListData }) {
+function Header({ setModalMode,taskListData, handelPriority, handelSearch}) {
   const [countComplete, setCountComplete]=useState(0)
+  
+
   useEffect(()=>{
     let a=0;
     taskListData.forEach(task => {
@@ -11,11 +13,13 @@ function Header({ setModalMode,taskListData }) {
     });
     setCountComplete(a)
   },[taskListData])
+
+   
   return (
     <div className="">
       <div className="flex justify-center">
         <div>
-          <input type="search" name="" id="" placeholder="Search Task" />
+          <input type="search" name="" id="" placeholder="Search Task" onChange={(e)=>handelSearch(e.target.value)}/>
         </div>
         <div className="bg-green-500 text-white">
           <button onClick={() => setModalMode("add")}>add Task</button>
@@ -23,9 +27,11 @@ function Header({ setModalMode,taskListData }) {
       </div>
 
       <div className="flex justify-center">
-        <select name="" id="" className="bg-black">
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
+        <select name="" id="" className="bg-black" defaultValue={""} onChange={(e)=>handelPriority(e.target.value)}>
+        <option value="" disabled>priority</option>
+          <option value="All">All</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
           <option value="Low">Low</option>
         </select>
 
