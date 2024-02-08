@@ -9,25 +9,22 @@ export default function AddTaskModal({
 }) {
   const [data, setData] = useState({
     id: modalMode === "add" ? crypto.randomUUID() : modalMode.id,
-    name: modalMode === "add" ? '' : modalMode.name,
+    name: modalMode === "add" ? "" : modalMode.name,
     isComplete: modalMode === "add" ? false : modalMode.isComplete,
-    priority: modalMode === "add" ? '' : modalMode.priority,
+    priority: modalMode === "add" ? "" : modalMode.priority,
   });
   function handelSubmit(e) {
     e.preventDefault();
 
-    if(data.name===''){
-      alert('input task name')
-      return
+    if (data.name === "") {
+      alert("input task name");
+      return;
     }
-    if(data.priority===''){
-      alert('select priority')
-      return 
+    if (data.priority === "") {
+      alert("select priority");
+      return;
     }
 
-
-    
-    
     modalMode === "add" ? handelAddTask(data) : handelEditTask(data);
   }
   function handelOnChange(e) {
@@ -39,7 +36,7 @@ export default function AddTaskModal({
 
   return (
     <>
-      <div className="p-8 absolute z-10 bg-slate-900 bg-opacity-100 top-28 left-1/2">
+      <div className="rounded p-8 absolute z-50 bg-gray-600 bg-opacity-100 top-32 left-1/2">
         <form onSubmit={handelSubmit}>
           <div>
             <input
@@ -47,6 +44,7 @@ export default function AddTaskModal({
               name="name"
               id="name"
               value={data.name}
+              className="rounded bg-gray-800 p-2 focus: pl-5 focus: outline-none w-full"
               onChange={handelOnChange}
               required
             />
@@ -55,31 +53,31 @@ export default function AddTaskModal({
             <select
               name="priority"
               id="priority"
-              className="bg-black"
-              defaultValue={data.Priority}
+              className="mt-2 px-3 py-2 bg-[#2D323F] rounded-md cursor-pointer"
+              defaultValue={data.priority}
               onChange={handelOnChange}
               required
             >
-              <option value=""></option>
+              <option value="">Priority</option>
               <option value="High">High</option>
               <option value="Medium">Medium</option>
               <option value="Low">Low</option>
             </select>
           </div>
-          <div className=" flex justify-between">
+          <div className=" flex justify-between mt-5">
             <button
               type="reset"
-              className="bg-red-400"
+              className="bg-red-400 p-1 rounded"
               onClick={() => setModalMode(false)}
             >
-              cancel
+              Cancel
             </button>
             <button
               type="submit"
-              className="bg-green-400"
+              className="bg-green-400 p-1 rounded"
               onClick={handelSubmit}
             >
-              {modalMode === "add" ? "add" : "update"}
+              {modalMode === "add" ? "Add Task" : "Update"}
             </button>
           </div>
         </form>

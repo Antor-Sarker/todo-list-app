@@ -1,6 +1,5 @@
 import updateLocalStorage from "../utils/updateLocalStorageData";
 
-
 export default function taskReducer(tasks, action) {
   switch (action.type) {
     case "InitialLocalData": {
@@ -12,34 +11,36 @@ export default function taskReducer(tasks, action) {
     }
 
     case "Priority": {
-      const { option, setFilterData, setFilterFound } = action.payload;
+      const { option, setFilterData, setFilterChange } = action.payload;
 
-      setFilterFound(true);
+      setFilterChange(true);
       if (option === "All") {
         setFilterData([]);
+        setFilterChange(false);
         return tasks;
       }
 
       const data = tasks.filter((task) => task.priority === option);
-      if (data.length === 0) setFilterFound(false);
-      else setFilterData([...data]);
+      if (data.length === 0) {
+        setFilterData([]);
+      } else setFilterData([...data]);
       return tasks;
     }
 
     case "Search": {
-      const { keyWord, setFilterData, setFilterFound } = action.payload;
-      setFilterFound(true);
+      const { keyWord, setFilterData, setFilterChange } = action.payload;
+      setFilterChange(true);
       if (keyWord === "") {
+        setFilterChange(false);
         setFilterData([]);
-        return tasks;
+        return [...tasks];
       }
 
       const data = tasks.filter((task) =>
         task.name.toUpperCase().includes(keyWord.toUpperCase())
       );
 
-      if (data.length === 0) setFilterFound(false);
-      else setFilterData([...data]);
+      if (data.length > 0) setFilterData([...data]);
       return tasks;
     }
 
@@ -57,8 +58,8 @@ export default function taskReducer(tasks, action) {
     case "Delete": {
       const afterDeleteData = tasks.filter(
         (task) => task.id !== action.payload
-      );
-
+        );
+        
       updateLocalStorage(afterDeleteData);
       return [...afterDeleteData];
     }

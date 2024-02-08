@@ -8,7 +8,7 @@ import initialLocalStorageData from "./utils/initialLocalStorageData";
 function App() {
   const [modalMode, setModalMode] = useState(false);
   const [filterData, setFilterData] = useState([]);
-  const [filterFound, setFilterFound] = useState(true);
+  const [filterChange, setFilterChange] = useState(false);
   const [tasks, dispatch] = useReducer(taskReducer, []);
 
   useEffect(() => {
@@ -23,20 +23,22 @@ function App() {
       type: "AddTask",
       payload: newTask,
     });
+    setFilterChange(false)
+    setFilterData([])
     setModalMode(false);
   }
 
   function handelPriority(option) {
     dispatch({
       type: "Priority",
-      payload: { option, setFilterData, setFilterFound },
+      payload: { option, setFilterData, setFilterChange },
     });
   }
 
   function handelSearch(keyWord) {
     dispatch({
       type: "Search",
-      payload: { keyWord, setFilterData, setFilterFound },
+      payload: { keyWord, setFilterData, setFilterChange },
     });
   }
 
@@ -52,6 +54,8 @@ function App() {
       type: "Delete",
       payload: id,
     });
+    setFilterChange(false);
+    setFilterData([]);
   }
 
   function handelEditTask(data) {
@@ -65,26 +69,30 @@ function App() {
 
   return (
     <>
-      <div className="bg-[#191D26] font-sans h-full p-32 text-white">
-        <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
+      <div className="bg-[#191D26] font-sans h-screen p-32 text-white">
+        <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] py-8 md:py-16">
           <Header
             setModalMode={setModalMode}
             tasks={filterData?.length > 0 ? filterData : tasks}
             handelPriority={handelPriority}
             handelSearch={handelSearch}
           />
-
-          {filterFound ? (
+          {tasks.length > 0 ? (
             <TaskList
               tasks={filterData.length > 0 ? filterData : tasks}
               modalMode={modalMode}
               setModalMode={setModalMode}
               handelComplete={handelComplete}
               handelDeleteTask={handelDeleteTask}
+              filterChange={filterChange}
+              filterData={filterData}
             />
           ) : (
-            <h1>Task Not Found</h1>
+            <h1 className="text-center text-2xl text-yellow-200 pt-5">
+              Task List is Empty!
+            </h1>
           )}
+
           {modalMode && (
             <AddTaskModal
               modalMode={modalMode}

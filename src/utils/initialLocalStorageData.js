@@ -6,7 +6,7 @@ export default function initialLocalStorageData() {
     const newTask = [
       {
         id: crypto.randomUUID(),
-        name: "task-1",
+        name: "React Job Task",
         isComplete: false,
         priority: "High",
       },
