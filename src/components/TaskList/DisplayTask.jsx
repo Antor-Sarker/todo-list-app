@@ -33,10 +33,10 @@ export default function DisplayTask({
           <div
             className={`w-16 text-center rounded ${
               task.priority === "High"
-                ? "bg-red-500"
+                ? "bg-red-400"
                 : task.priority === "Medium"
-                ? "bg-yellow-500"
-                : "bg-green-500"
+                ? "bg-yellow-400"
+                : "bg-green-400"
             } mt-1`}
           >
             {task.priority}

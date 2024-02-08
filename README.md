@@ -1,8 +1,21 @@
-# React + Vite
+# Live website Link
+# https://todo-list-react-101.netlify.app/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Project Overview:
+1) initially displayed one task from local storage
+2) add new task on todolist
+3) edit existing task from list
+4) toggle complete/incomplete task from checkbox
+5) identify task with complete or incomplete status
+6) delete any task from list by click delete button
+7) display counter for total tasks and completed tasks.
 
-Currently, two official plugins are available:
+# Bonus Part:
+8) All activity save on Local Storage. when represh page data not detele.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Special Challenge:
+9) high/medium/low priority filter
+
+# Additional Features
+10) search any specific task by search filter
+
