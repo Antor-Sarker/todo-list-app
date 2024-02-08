@@ -43,6 +43,7 @@ export default function AddTaskModal({
               type="text"
               name="name"
               id="name"
+              placeholder="input task"
               value={data.name}
               className="rounded bg-gray-800 p-2 focus: pl-5 focus: outline-none w-full"
               onChange={handelOnChange}
